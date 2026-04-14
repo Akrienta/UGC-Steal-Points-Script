@@ -1,16 +1,16 @@
--- Получаем сервисы и игрока
+-- Seachers for player and hooks when found. Same with server.
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local LocalPlayer = Players.LocalPlayer
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
--- Создаем GUI
+-- Create a GUI
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "KillAuraGUI"
 ScreenGui.ResetOnSpawn = false
 ScreenGui.Parent = PlayerGui
 
--- Основной фрейм
+-- Main Frame
 local MainFrame = Instance.new("Frame")
 MainFrame.Name = "MainFrame"
 MainFrame.Size = UDim2.new(0, 200, 0, 120)
@@ -22,7 +22,10 @@ MainFrame.Active = true
 MainFrame.Draggable = true
 MainFrame.Parent = ScreenGui
 
--- Заголовок панели
+-----------
+-- Title --
+-----------
+-- Title Bar (Rectangle)
 local TitleBar = Instance.new("Frame")
 TitleBar.Name = "TitleBar"
 TitleBar.Size = UDim2.new(1, 0, 0, 20)
@@ -30,8 +33,7 @@ TitleBar.Position = UDim2.new(0, 0, 0, 0)
 TitleBar.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 TitleBar.BorderSizePixel = 0
 TitleBar.Parent = MainFrame
-
--- Текст заголовка
+-- Title Text
 local Title = Instance.new("TextLabel")
 Title.Name = "Title"
 Title.Size = UDim2.new(0, 100, 1, 0)
@@ -44,7 +46,7 @@ Title.Font = Enum.Font.SourceSans
 Title.TextSize = 14
 Title.Parent = TitleBar
 
--- Кнопка закрытия
+-- Close Button
 local CloseButton = Instance.new("TextButton")
 CloseButton.Name = "CloseButton"
 CloseButton.Size = UDim2.new(0, 20, 1, 0)
@@ -57,7 +59,7 @@ CloseButton.Font = Enum.Font.SourceSans
 CloseButton.TextSize = 14
 CloseButton.Parent = TitleBar
 
--- Кнопка минимизации
+-- Minimise Button
 local MinimizeButton = Instance.new("TextButton")
 MinimizeButton.Name = "MinimizeButton"
 MinimizeButton.Size = UDim2.new(0, 20, 1, 0)
@@ -70,7 +72,7 @@ MinimizeButton.Font = Enum.Font.SourceSans
 MinimizeButton.TextSize = 14
 MinimizeButton.Parent = TitleBar
 
--- Фрейм контента
+-- Content Frame
 local ContentFrame = Instance.new("Frame")
 ContentFrame.Name = "ContentFrame"
 ContentFrame.Size = UDim2.new(1, 0, 1, -20)
@@ -79,7 +81,7 @@ ContentFrame.BackgroundTransparency = 1
 ContentFrame.Visible = true
 ContentFrame.Parent = MainFrame
 
--- Кнопка Kill Aura
+-- Aura Button
 local KillAuraButton = Instance.new("TextButton")
 KillAuraButton.Name = "KillAuraButton"
 KillAuraButton.Size = UDim2.new(0.8, 0, 0, 30)
@@ -92,7 +94,7 @@ KillAuraButton.Font = Enum.Font.SourceSans
 KillAuraButton.TextSize = 14
 KillAuraButton.Parent = ContentFrame
 
--- Лейбл для атрибуции
+-- Credit Label
 local CreditLabel = Instance.new("TextLabel")
 CreditLabel.Name = "CreditLabel"
 CreditLabel.Size = UDim2.new(0.8, 0, 0, 20)
@@ -104,7 +106,7 @@ CreditLabel.Font = Enum.Font.SourceSans
 CreditLabel.TextSize = 14
 CreditLabel.Parent = ContentFrame
 
--- Переменные для Kill Aura
+-- Variables for Aura
 local KillAuraEnabled = false
 local RangePart = nil
 local HeartbeatConnection = nil
