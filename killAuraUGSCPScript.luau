@@ -110,18 +110,18 @@ CreditLabel.Parent = ContentFrame
 local KillAuraEnabled = false
 local RangePart = nil
 local HeartbeatConnection = nil
-local Range = 50 -- Радиус действия (в stud)
+local Range = 50 -- Range (in stud)
 
--- Переменная для вращения
+-- Variable for rotation
 local BodyAngularVelocity = nil
-local SpinSpeed = 50 -- Скорость вращения (рад/с, можно настроить)
+local SpinSpeed = 50 -- Rotation speed (rad/s, can be adjusted)
 
--- Функция закрытия GUI
+-- GUI close function
 CloseButton.MouseButton1Click:Connect(function()
     ScreenGui:Destroy()
 end)
 
--- Функция минимизации
+-- Minimization function
 local Minimized = false
 local OriginalSize = MainFrame.Size
 MinimizeButton.MouseButton1Click:Connect(function()
@@ -135,9 +135,9 @@ MinimizeButton.MouseButton1Click:Connect(function()
     end
 end)
 
--- Функция включения Kill Aura и вращения
+-- Kill Aura and rotation enable function
 local function EnableKillAura()
-    -- Создаем часть для визуализации радиуса
+    -- Create a part to visualize the radius
     RangePart = Instance.new("Part")
     RangePart.Name = "KillAuraRange"
     RangePart.Shape = Enum.PartType.Ball
@@ -149,29 +149,29 @@ local function EnableKillAura()
     RangePart.Color = Color3.fromRGB(0, 255, 255)
     RangePart.Parent = workspace
 
-    -- Добавляем вращение персонажа
+    -- Adding character rotation
     if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
         BodyAngularVelocity = Instance.new("BodyAngularVelocity")
         BodyAngularVelocity.Name = "SpinVelocity"
-        BodyAngularVelocity.MaxTorque = Vector3.new(0, math.huge, 0) -- Вращение только по оси Y
-        BodyAngularVelocity.AngularVelocity = Vector3.new(0, SpinSpeed, 0) -- Скорость вращения
+        BodyAngularVelocity.MaxTorque = Vector3.new(0, math.huge, 0) -- Rotation only around the Y axis
+        BodyAngularVelocity.AngularVelocity = Vector3.new(0, SpinSpeed, 0) -- Rotation speed
         BodyAngularVelocity.Parent = LocalPlayer.Character.HumanoidRootPart
     end
 
-    -- Обновление позиции части и атака
+    -- Update the unit's position and attack
     HeartbeatConnection = RunService.Heartbeat:Connect(function()
         if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-            -- Обновляем позицию части
+            -- Updating the part's position
             RangePart.Position = LocalPlayer.Character.HumanoidRootPart.Position
 
-            -- Находим инструмент
+            -- Finding a tool
             local Tool = LocalPlayer.Character:FindFirstChildOfClass("Tool")
             if Tool and Tool:FindFirstChild("Handle") then
-                -- Проверяем части в радиусе
+                -- We check the parts within the radius
                 local PartsInRange = workspace:GetPartsInPart(RangePart)
                 for _, Part in ipairs(PartsInRange) do
                     if Part.Parent and Part.Parent ~= LocalPlayer.Character and Part.Parent:FindFirstChildOfClass("Humanoid") then
-                        -- Активируем инструмент и симулируем касание
+                        -- Activate the tool and simulate touching
                         Tool:Activate()
                         pcall(function()
                             firetouchinterest(Tool.Handle, Part, 0)
@@ -184,7 +184,7 @@ local function EnableKillAura()
     end)
 end
 
--- Функция отключения Kill Aura и вращения
+-- Kill Aura and rotation disable function
 local function DisableKillAura()
     if HeartbeatConnection then
         HeartbeatConnection:Disconnect()
@@ -200,7 +200,7 @@ local function DisableKillAura()
     end
 end
 
--- Обработчик кнопки Kill Aura
+-- Kill Aura button handler
 KillAuraButton.MouseButton1Click:Connect(function()
     KillAuraEnabled = not KillAuraEnabled
     if KillAuraEnabled then
