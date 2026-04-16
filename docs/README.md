@@ -6,5 +6,5 @@ Works on executors Yub-X, Potassium, Delta, Ronix PC, Wave, Volt, Ronix Mobile, 
 
 # Fork & Commits
 If you are a forker of this repository, make a fork, and for each commit that you make (to the point of merge), add your additions as a brief overview, following the pattern of:
-`(16/04/2026 13:~~ @Ema0w0) > `
+`(DD/MM/YYYY: {Timezone}{HH}:~~ @{username}) > {description}`
 Then create a merge request.
